@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+	
+	<bean id="exam" class="spring.di.entity.NewlecExam" p:kor="10" p:eng="10"/>
+	
+	<bean id="console" class="spring.di.ui.InlineExamConsole">
+	<!-- Setter 설정  -->
+		<property name="exam" ref="exam"/>
+	</bean>
+<!-- 	<bean id="exams" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<bean id="1exam" class="spring.di.entity.NewlecExam" p:kor="20" p:eng="10"/>
+				직접 생성 
+				<ref bean="exam"/>
+				위에 생성된 객체를 참조
+			</list>
+		</constructor-arg>
+	</bean> -->
+	
+	<!-- util:list는 실제로 객체를 만들지만 위의 방식은 실제 객체를 만드는 것은 아니다. -->
+	<util:list id="exams" list-class="java.util.ArrayList">
+				<bean id="1exam" class="spring.di.entity.NewlecExam" p:kor="20" p:eng="10"/>
+				<!-- 직접 생성  -->
+				<ref bean="exam"/>
+				<!-- 위에 생성된 객체를 참조 -->
+	</util:list>
+	
+	
+</beans>
